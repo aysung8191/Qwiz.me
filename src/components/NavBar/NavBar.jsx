@@ -12,6 +12,8 @@ export default function NavBar({ user, setUser }) {
         <nav>
             <Link to="/flashcards">Flashcard List</Link>
             &nbsp; | &nbsp;
+            <Link to="/flashcards/create">Create Flashcard</Link>
+            &nbsp; | &nbsp;
             <Link to="/flashcards/new">Flashcard</Link>
             &nbsp;&nbsp; Welcome, {user.name}
             &nbsp;&nbsp;<Link to="" onClick={handleLogOut}>Log Out</Link>

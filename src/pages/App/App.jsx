@@ -2,9 +2,11 @@ import './App.css';
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { getUser } from '../../utilities/users-service'
+import * as flashcardsAPI from '../../utilities/flashcards-api'
 import AuthPage from '../AuthPage/AuthPage';
 import Flashcard from '../Flashcard/Flashcard';
 import FlashcardList from '../FlashcardList/FlashcardList';
+import NewFlashcardForm from '../../components/NewFlashcardForm/NewFlashcardForm';
 import NavBar from '../../components/NavBar/NavBar'
 import axios from 'axios'
 
@@ -64,6 +66,11 @@ export default function App() {
     return textArea.value
   }
 
+  async function addFlashcard(newFlashcard) {
+    await flashcardsAPI.addFlashcard(newFlashcard)
+    setFlashcards([...flashcards, newFlashcard])
+  }
+
   return (
     <main className="App">
       {
@@ -72,6 +79,7 @@ export default function App() {
           <NavBar user={user} setUser={setUser} />
           <Routes>
             <Route path="/flashcards/new" element={<Flashcard />} />
+            <Route path="/flashcards/create" element={<NewFlashcardForm />} user={user} addFlashcard={addFlashcard}/>
             <Route path="/flashcards" className="container" element={<FlashcardList flashcards={flashcards} />} />
           </Routes>
         </>
